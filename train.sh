@@ -10,7 +10,7 @@ LR=2e-4
 CUDA_VISIBLE_DEVICES=3 python train.py \
     --model_name_or_path $MODEL \
     --add_soft_prompts $ADD_SOFT_PROMPT\
-    --hf_hub_token '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'\
+    --hf_hub_token ''\
     --num_general_prefix_tokens $N_PREFIX \
     --num_special_prefix_tokens $N_SPECIAL \
     --parameter_efficient_mode $EFFICIENT \
