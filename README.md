@@ -3,7 +3,9 @@
 
 ## Usage
 
-All data and models can be loaded from Huggingface. A huggingface Hub token is required to use the Llama family models. To set up the environment, run
+All data and models can be loaded from Huggingface. A Hugging Face Hub token is required to use the Llama family models. 
+
+To set up the environment, run
 ```
 pip install -r requirements.txt 
 ```
