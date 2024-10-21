@@ -4,4 +4,8 @@
 ```
 python data_agent.py
 ```
-Replace the GPT4's API key 
+
+Replace the GPT4's API key and the system path
+![q](prompt_templates/fig1.png)
+
+
