@@ -5,9 +5,7 @@
 python data_agent.py
 ```
 
-Replace the GPT4's API key and the system path.
-
-<img src="prompt_templates/fig1.png" alt="q" width="500"/>
+Replace the GPT4's API key.
 
 But I have uploaded all datasets we ran in dataset_folder, and you would actually need to take and use it.
 
