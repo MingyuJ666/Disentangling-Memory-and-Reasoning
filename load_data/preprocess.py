@@ -1,6 +1,6 @@
 import re, os, json
 import sys
-sys.path.append('/common/home/mj939/planning_tokens')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from datasets import load_dataset
 from torch.utils.data import Dataset
 from load_data.utils import _strip_string, delete_extra_zero, compare_both_string_and_number_format
