@@ -2,7 +2,8 @@ from openai import OpenAI
 import re
 import json
 import sys
-sys.path.append('/.../.../.../planning_tokens') # your path
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from load_data.preprocess import *
 api = ''
 
