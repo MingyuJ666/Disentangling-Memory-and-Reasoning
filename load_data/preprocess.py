@@ -356,7 +356,6 @@ class BaseData(Dataset):
        
         match = self.ANS_RE.search(completion)
         
-        
         if match:
             match_str = match.group(1).strip()
             match_str = match_str.replace(",", "")
@@ -367,9 +366,11 @@ class BaseData(Dataset):
     def is_correct(self, model_completion, gt_example):
         gt_answer = self.extract_answer(gt_example)
         print(gt_answer)
+        
         assert gt_answer != self.INVALID_ANS
         try:
             pred_answer = self.extract_answer(model_completion)
+            print(pred_answer)
         except:
             pred_answer = self.INVALID_ANS
         return pred_answer == gt_answer
@@ -479,7 +480,7 @@ class AquaData(BaseData):
         choice = choice.replace("(", " (").replace(")", ") ")
         choice = "Answer Choices:" + choice
 
-        q = example["question"].strip() + '\n ' + choice
+        q = example["question"].strip() + '\n' + choice
 
         ans = example["correct"].strip()
         cot = example["rationale"].strip()
@@ -553,12 +554,14 @@ class StrategyQAData(BaseData):
     def parse_q_a(self, example):
         inst = 'Answer the following question Ture or False step by step using the supporting facts in your knowledge.'
         question = example["question"]
+
         answer = example["answer"]
         answer = 'True' if answer else 'False'
 
         cot_steps = [sentence.strip() for sentence in example['facts'].split('.') if sentence.strip()]
      
         return inst, question, cot_steps, answer
+
 
 
 
@@ -578,8 +581,7 @@ class StrategyQAData_Ours(BaseAgentData):
         
 
     def load_data(self, split: str):
-        json_file = "/common/home/mj939/planning_tokens/load_data/dataset_folder/StrategyQA_{}_clean.json".format(split)
-        print(json_file)
+        json_file = "./load_data/dataset_folder/StrategyQA_{}_clean.json".format(split)
         if os.path.exists(json_file):
             with open(json_file, "r") as f:
                 print("Loading data from json file")
@@ -601,6 +603,121 @@ class StrategyQAData_Ours(BaseAgentData):
 
 
 
+class CommonsenseQAData_Ours(BaseAgentData):
+     
+    def __init__(self, split: str, soft_prompt_text: dict,
+                 invalid_ans="[invalid]", add_soft_prompts=False,
+                 only_at_front=False, plan_first=False, plan_only=False,
+                 prompt_template=None, step_type_ids=None, tokenizer=None,
+                 step_type_predictor=None):
+ 
+        super(CommonsenseQAData_Ours, self).__init__(split, soft_prompt_text,
+                                                  invalid_ans, add_soft_prompts, only_at_front, plan_first, plan_only,
+                                                  prompt_template, step_type_ids, tokenizer, step_type_predictor)
+        
+
+    def load_data(self, split: str):
+        json_file = './load_data/dataset_folder/commonsense_qa_{}_clean_CC.json'.format(split)
+        print(json_file)
+        if os.path.exists(json_file):
+            with open(json_file, "r") as f:
+                print("Loading data from json file")
+                data = json.load(f)
+            data = [entry for entry in data if entry.get("split") == split]
+                
+        else:
+            print("No matching data found.")
+            exit(111)
+        
+        return data
+            
+
+    def parse_q_a(self, example):
+       
+        inst = 'Answer the following question True or False step by step using the supporting facts in your knowledge.'
+        qu = example["question"]
+        question = qu.replace('Question: ', '', 1)
+        
+        cot_steps = example["cot_steps"]
+        
+        if cot_steps == []:
+            cot_steps = ['']
+        answer = example["answer"]
+        
+        return inst, question, cot_steps, answer
+    
+    def extract_answer(self, completion):
+        preds = completion.split("The answer is:")
+        pred = preds[-1].strip()
+        pred = pred.upper()
+        pred = re.findall(r'A|B|C|D|E', pred)
+        if len(preds) > 1:
+            if len(pred) > 0:
+                return pred[0]
+            else:
+                return self.INVALID_ANS
+        else:
+            try:
+                return pred[-1]
+            except:
+                print(preds)
+                return self.INVALID_ANS
 
 
+class TruthfulQAData_Ours(BaseAgentData):
+     
+    def __init__(self, split: str, soft_prompt_text: dict,
+                 invalid_ans="[invalid]", add_soft_prompts=False,
+                 only_at_front=False, plan_first=False, plan_only=False,
+                 prompt_template=None, step_type_ids=None, tokenizer=None,
+                 step_type_predictor=None):
+ 
+        super(TruthfulQAData_Ours, self).__init__(split, soft_prompt_text,
+                                                  invalid_ans, add_soft_prompts, only_at_front, plan_first, plan_only,
+                                                  prompt_template, step_type_ids, tokenizer, step_type_predictor)
+        
 
+    def load_data(self, split: str):
+        json_file = './load_data/dataset_folder/truthful_qa_{}_clean_CC.json'.format(split)
+        print(json_file)
+        if os.path.exists(json_file):
+            with open(json_file, "r") as f:
+                print("Loading data from json file")
+                data = json.load(f)
+            data = [entry for entry in data if entry.get("split") == split]
+        else:
+            print("No matching data found.")
+            exit(111)
+        
+        return data
+            
+
+    def parse_q_a(self, example):
+        print(example)
+       
+        inst = 'Answer the following question True or False step by step using the supporting facts in your knowledge.'
+        question  = example["question"]
+        cot_steps = example["cot_steps"]
+        
+        if cot_steps == []:
+            cot_steps = ['']
+        answer = example["answer"]
+        
+        return inst, question, cot_steps, answer
+    
+    def extract_answer(self, completion):
+        preds = completion.split("The answer is:")
+        pred = preds[-1].strip()
+        pred = pred.upper()
+        pred = re.findall(r'A|B|C|D|E|F|G|H|I|J|K|L|M|N', pred)
+        if len(preds) > 1:
+            if len(pred) > 0:
+                return pred[0]
+            else:
+                return self.INVALID_ANS
+        else:
+            try:
+                return pred[-1]
+            except:
+                print(preds)
+                return self.INVALID_ANS
