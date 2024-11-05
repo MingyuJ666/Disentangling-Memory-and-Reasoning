@@ -15,7 +15,8 @@ from transformers.utils import logging
 from model.load_model import MyAutoModelForCausalLM
 from load_data.supervised_dataset import make_supervised_data_module
 from load_data.constant_len_dataset import make_constant_len_data_module
-from load_data.preprocess import GSMData, AquaData, StrategyQAData, StrategyQAData_Ours
+from load_data.preprocess import GSMData, AquaData, StrategyQAData, StrategyQAData_Ours, CommonsenseQAData_Ours, TruthfulQAData_Ours
+from load_data.k_shot_dataset import KshotDataset
 from model.peft_model import MyPeftModelForCausalLM
 from huggingface_hub import login
 
@@ -34,7 +35,7 @@ logger = logging.get_logger(__name__)
 @dataclass
 class ModelArguments:
     random_initialize: Optional[bool] = field(default=False)
-    model_name_or_path: Optional[str] = field(default="meta-llama/Llama-2-7b-hf",
+    model_name_or_path: Optional[str] = field(default="Qwen/Qwen2.5-7B-Instruct",
         metadata={"help": "pre-trained language model name on Huggingface, or path to a checkpoint."},)
     hf_hub_token: Optional[str] = field(default='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')
     num_general_prefix_tokens: Optional[int] = field(default=3)
@@ -57,7 +58,7 @@ class ModelArguments:
 @dataclass
 class DataArguments:
     dataset: str = field(default="gsm8k", 
-        metadata={"help": "dataset name on Huggingface.", "choices": ["gsm8k", "aqua", "math","qa","stratgeqa_agent","qabig"]})
+        metadata={"help": "dataset name on Huggingface.", "choices": ["gsm8k", "aqua", "math","qa","stratgeqa_agent",'commonsenseqa_agent','truthfulqa_agent']})
     mode: str = field(default="supervised", metadata={"choices": ["supervised", "constant_len"]})
     use_demonstrations: Optional[bool] = field(default=False)
     demo_selection: Optional[str] = field(default="uniform")
@@ -109,7 +110,7 @@ def train():
     login(token=model_args.hf_hub_token)
 
 
-    if 'llama' in model_args.model_name_or_path or 'alpaca' in model_args.model_name_or_path:
+    if 'llama2' in model_args.model_name_or_path or 'alpaca' in model_args.model_name_or_path:
         tokenizer = transformers.LlamaTokenizer.from_pretrained(
             model_args.model_name_or_path,
             cache_dir=training_args.cache_dir,
@@ -148,13 +149,13 @@ def train():
             
         else:
             prompt_text = {'prefix': '', 'answer': '', 'assignment': ''}
-          
+
 
             if "memory" in model_args.extract_step_type_tokens:
                 
                 class StepType:
                     def __init__(self):
-                        self.vocab = ['reason','rag']
+                        self.vocab = ['reason','memory']
 
                     def predict(self, text: str, start=0):
                         
@@ -166,7 +167,7 @@ def train():
                             if match == 'reason':
                                 result.append('reason')
                             elif match == 'rag':
-                                result.append('rag')
+                                result.append('memory')
                         return result
                         
                 
@@ -213,12 +214,13 @@ def train():
     elif data_args.dataset == "aqua":
         data_class = AquaData
     elif data_args.dataset == "qa":
-        data_class = StrategyQAData
-    elif data_args.dataset == "qabig":
-        data_class = StrategyQAData    
+        data_class = StrategyQAData 
     elif data_args.dataset == "stratgeqa_agent":
         data_class = StrategyQAData_Ours
-
+    elif data_args.dataset == "commonsenseqa_agent":
+        data_class = CommonsenseQAData_Ours
+    elif data_args.dataset == "truthfulqa_agent":
+        data_class = TruthfulQAData_Ours
     else:
         raise NotImplementedError
     
@@ -233,7 +235,9 @@ def train():
                             prompt_template=data_args.prompt_template,
                             step_type_ids=step_type_ids, tokenizer=tokenizer,
                             step_type_predictor=step_type_predictor)
-       
+    
+        
+        
         
         
     else:
@@ -246,8 +250,12 @@ def train():
                             step_type_ids=step_type_ids, tokenizer=tokenizer,
                             step_type_predictor=step_type_predictor)
         
+        
+        
    
-
+    if data_args.use_demonstrations:
+        dataset = KshotDataset(dataset, dataset, data_args.k_shot,
+                            data_args.demo_selection)
         
     
     eval_dataset = data_class("test", prompt_text, 
@@ -258,6 +266,9 @@ def train():
                         prompt_template=data_args.prompt_template,
                         step_type_ids=step_type_ids, tokenizer=tokenizer,
                         step_type_predictor=step_type_predictor,)
+    print("eval dataset size", len(eval_dataset))
+    
+    
     
     
   
@@ -306,7 +317,7 @@ def train():
         )
    
     if 'lora' in model_args.parameter_efficient_mode:
-        if 'llama' in model_args.model_name_or_path or 'alpaca' in model_args.model_name_or_path:
+        if 'llama' in model_args.model_name_or_path or 'alpaca' in model_args.model_name_or_path or 'Qwen' in model_args.model_name_or_path:
             target_modules = []
             if model_args.lora_module == 'mlp':
                 target_modules += ["gate_proj", "up_proj", "down_proj"]
@@ -331,7 +342,7 @@ def train():
                 task_type=TaskType.CAUSAL_LM,
                 prompt_tuning_init=PromptTuningInit.TEXT,
                 num_virtual_tokens=model_args.num_general_prefix_tokens,
-                prompt_tuning_init_text="Solve the following math problem step-by-step:",
+                prompt_tuning_init_text="Solve the following problem step-by-step:",
                 tokenizer_name_or_path=model_args.model_name_or_path,
             )
             model = get_peft_model(model, peft_config)
