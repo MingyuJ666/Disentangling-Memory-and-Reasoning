@@ -1,13 +1,20 @@
 ## Preprocess
 
 ### Preprocess the dataset into reason and Memory pattern
+1️⃣ First: Replace the GPT4's API key in data_agent.py.
 ```
 python data_agent.py
 ```
 
-Replace the GPT4's API key.
 
-But I have uploaded all datasets we ran in dataset_folder, and you would actually need to take and use it.
+
+2️⃣ However, I have uploaded all the datasets we ran in the dataset_folder, which you should take and use.
+
+
+```
+python data_agent.py --mode "train" --dataset "StrategyQA"
+```
+3️⃣ You can choose the different datasets and choose a train or test pattern.
 
 ### Check the dataset in preprocess.py
-class StrategyQAData_Ours is the class we need
+Class StrategyQAData_Ours, TruthfulQAData_Ours, and CommonsenseQAData_Ours are the class we need.
