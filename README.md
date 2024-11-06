@@ -124,3 +124,4 @@ CUDA_VISIBLE_DEVICES=0 python eval.py \\\
     --load_in_8bit True \
 
 ## Where is the Checkpoint
+you can find Llama2-7b's checkpoint on StrategyQA here: https://drive.google.com/drive/folders/1w1Ukd7LOlqlUue8uTf8hjEiz12S2Zwnw?usp=drive_link
