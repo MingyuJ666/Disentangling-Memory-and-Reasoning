@@ -160,5 +160,7 @@ CUDA_VISIBLE_DEVICES=0 python eval.py \\\
     --num_plan_types 5 \\\
     --num_test 1000 \\\
     --load_in_8bit True \
+### Attention heatmap generation:
+Use analysis.ipynb to generate attention map.
 
 
