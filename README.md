@@ -24,7 +24,7 @@ The `train.sh` script can be used for (parameter efficient) fine-tuning a pre-tr
 
 Key arguments:
 
-* `--dataset`: Same as `--dataset` in `step_type.sh`.
+* `--dataset`: you can choose {'stratgeqa_agent', 'commonsenseqa_agent', 'truthfulqa_agent'}
 
 * `--model_name_or_path`: Base model name/path.
 
