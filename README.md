@@ -38,9 +38,9 @@ Key arguments:
 
 * `--extract_step_type_tokens`: same as `--selection_method` in `step_type.sh`.
 
-* `--num_plan_types`: same as `--num_plan_types` in `step_type.sh`.
+* `--num_plan_types`: use memory.
 
-* `--model_max_length`: We set this to 512 for `gsm8k` and 1024 for `math` and `aqua`.
+* `--num_train_epochs`: 10 epochs are suitable for StratgyQA, 5 is suitable for CommonsenseQA, 15 is suitable for TruthfulQA
 
 * `--num_test`: The maximum number of testing examples to be evaluated at the end of each epoch. We set this to 1000.
 
