@@ -1,7 +1,7 @@
 # Disentangling Memory and Reasoning in LLM
 ![alt text](img/overview.png)
 
-This is the official repository for the paper [Disentangling Memory and Reasoning Ability in Large Language Models](https://arxiv.org/abs/2310.05707). 
+This is the official repository for the paper [Disentangling Memory and Reasoning Ability in Large Language Models](). 
 
 The existing LLM inference pipeline operates as an opaque process without explicit separation between knowledge retrieval and reasoning steps, making the model’s decision-making process unclear and disorganized. This ambiguity can lead to issues such as hallucinations and knowledge forgetting, significantly impacting LLMs' reliability in high-stakes domains. In this paper, we propose a new inference paradigm that decomposes the complex inference process into two distinct and clear actions: (1) memory recall: which retrieves relevant knowledge, and (2) reasoning: which performs logical steps based on the recalled knowledge. To facilitate this decomposition, we introduce two special tokens {memory}  and {reason}, guiding the model to distinguish between steps that require knowledge retrieval and those that involve reasoning.  Our experiment results show that this decomposition not only improves model performance but also enhances the interpretability of the inference process, enabling users to identify sources of error and refine model responses effectively. 
 ## Set up 
@@ -170,10 +170,5 @@ Use analysis.ipynb to generate an attention map.
 
 * To cite our paper:
     ```
-    @article{wang2023guiding,
-    title={Guiding language model reasoning with planning tokens},
-    author={Wang, Xinyi and Caccia, Lucas and Ostapenko, Oleksiy and Yuan, Xingdi and Wang, William Yang and Sordoni, Alessandro},
-    journal={arXiv preprint arXiv:2310.05707},
-    year={2023}
-    }
+   
     ```
