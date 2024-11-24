@@ -172,9 +172,9 @@ Use analysis.ipynb to generate an attention map.
 
 * To cite our paper:
     ```
-  @article{in2024disentangling,
+  @article{jin2024disentangling,
   title={Disentangling Memory and Reasoning Ability in Large Language Models},
-  author={Mingyu Jin and Weidi Luo and Sitao Cheng and Xinyi Wang and Wenyue Hua and Ruixiang Tang and William Yang Wang and Yongfeng Zhang},
+  author={Jin, Mingyu and Luo, Weidi and Cheng, Sitao and Wang, Xinyi and Hua, Wenyue and Tang, Ruixiang and Wang, William Yang and Zhang, Yongfeng},
   journal={arXiv preprint arXiv:2411.13504},
   year={2024}
   }
