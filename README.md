@@ -168,14 +168,4 @@ CUDA_VISIBLE_DEVICES=0 python eval.py \\\
 ### Attention heatmap generation:
 Use analysis.ipynb to generate an attention map.
 
-## Citation
 
-* To cite our paper:
-    ```
-  @article{jin2024disentangling,
-  title={Disentangling Memory and Reasoning Ability in Large Language Models},
-  author={Jin, Mingyu and Luo, Weidi and Cheng, Sitao and Wang, Xinyi and Hua, Wenyue and Tang, Ruixiang and Wang, William Yang and Zhang, Yongfeng},
-  journal={arXiv preprint arXiv:2411.13504},
-  year={2024}
-  }
-    ```
