@@ -147,26 +147,28 @@ Key arguments:
 * Please follow `train.sh` for other arguments.
 
 ### To evaluate LLAMA2-7B in the StrategyQA dataset: you can follow this setting to get the reported score(0.706):
+```
 DATASET=stratgeqa_agent\
 MODEL=meta-llama/Llama-2-7b-chat-hf\
 ADD_SOFT_PROMPT=True\
 EFFICIENT=lora+prompt-tuning\
 STEP_TYPE=memory\
-CUDA_VISIBLE_DEVICES=0 python eval.py \\\
-    --base_model_name_or_path $MODEL \\\
-    --hf_hub_token ....... \\\
-    --model_name_or_path ./checkpoints/meta-llama/Llama-2-7b-chat-hf/stratgeqa_agent/step_type=memory-2-4-efficient=lora+prompt-tuning-lr=2e-4-soft-prompt=True/checkpoint-801\\\
-    --add_soft_prompts $ADD_SOFT_PROMPT\\\
-    --parameter_efficient_mode $EFFICIENT \\\
-    --dataset $DATASET \\\
-    --batch_size 1 \\\
-    --max_length 700 \\\
-    --seed 300 \\\
-    --extract_step_type_tokens $STEP_TYPE \\\
-    --embedding_model_name $MODEL \\\
-    --num_plan_types 5 \\\
-    --num_test 1000 \\\
+CUDA_VISIBLE_DEVICES=0 python eval.py \
+    --base_model_name_or_path $MODEL \
+    --hf_hub_token ....... \
+    --model_name_or_path ./checkpoints/meta-llama/Llama-2-7b-chat-hf/stratgeqa_agent/step_type=memory-2-4-efficient=lora+prompt-tuning-lr=2e-4-soft-prompt=True/checkpoint-801\
+    --add_soft_prompts $ADD_SOFT_PROMPT\
+    --parameter_efficient_mode $EFFICIENT \
+    --dataset $DATASET \
+    --batch_size 1 \
+    --max_length 700 \
+    --seed 300 \
+    --extract_step_type_tokens $STEP_TYPE \
+    --embedding_model_name $MODEL \
+    --num_plan_types 5 \
+    --num_test 1000 \
     --load_in_8bit True \
+```
 ### Attention heatmap generation:
 Use analysis.ipynb to generate an attention map.
 
