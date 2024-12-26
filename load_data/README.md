@@ -5,6 +5,10 @@
 ```
 python data_agent.py
 ```
+If you want to first generate the memory step and then the reason step:
+```
+python data_agent_order.py --mode "train" --dataset "StrategyQA"
+```
 
 
 
@@ -13,6 +17,10 @@ python data_agent.py
 
 ```
 python data_agent.py --mode "train" --dataset "StrategyQA"
+```
+If you want to first generate the memory step and then the reason step:
+```
+python data_agent_order.py --mode "train" --dataset "StrategyQA"
 ```
 3️⃣ You can choose the different datasets and choose a train or test pattern.
 
