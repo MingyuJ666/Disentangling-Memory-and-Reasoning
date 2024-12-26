@@ -9,19 +9,7 @@ If you want to first generate the memory step and then the reason step:
 ```
 python data_agent_order.py --mode "train" --dataset "StrategyQA"
 ```
-
-
-
 2️⃣ However, I have uploaded all the datasets we ran in the dataset_folder, which you should take and use.
-
-
-```
-python data_agent.py --mode "train" --dataset "StrategyQA"
-```
-If you want to first generate the memory step and then the reason step:
-```
-python data_agent_order.py --mode "train" --dataset "StrategyQA"
-```
 3️⃣ You can choose the different datasets and choose a train or test pattern.
 
 ### Check the dataset in preprocess.py
