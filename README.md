@@ -3,7 +3,7 @@
 
 This is the official repository for the paper [Disentangling Memory and Reasoning Ability in Large Language Models](https://arxiv.org/abs/2411.13504). 
 
-The paper has been accepted for ACL 2025 Main.
+The paper has been accepted for **ACL 2025 Main**.
 
 Arxiv Link: https://arxiv.org/abs/2411.13504
 
