@@ -177,3 +177,22 @@ CUDA_VISIBLE_DEVICES=0 python eval.py \
 Use analysis.ipynb to generate an attention map.
 
 
+### Citation
+If you find the code is valuable, please use this citation.
+```
+@article{jin2024disentangling,
+  title={Disentangling memory and reasoning ability in large language models},
+  author={Jin, Mingyu and Luo, Weidi and Cheng, Sitao and Wang, Xinyi and Hua, Wenyue and Tang, Ruixiang and Wang, William Yang and Zhang, Yongfeng},
+  journal={arXiv preprint arXiv:2411.13504},
+  year={2024}
+}
+```
+
+```
+@inproceedings{jin2024disentangling,
+  title={Disentangling memory and reasoning ability in large language models},
+  author={Jin, Mingyu and Luo, Weidi and Cheng, Sitao and Wang, Xinyi and Hua, Wenyue and Tang, Ruixiang and Wang, William Yang and Zhang, Yongfeng},
+  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics},
+  year={2025}
+}
+```
