@@ -189,10 +189,22 @@ If you find the code is valuable, please use this citation.
 ```
 
 ```
-@inproceedings{jin2024disentangling,
-  title={Disentangling memory and reasoning ability in large language models},
-  author={Jin, Mingyu and Luo, Weidi and Cheng, Sitao and Wang, Xinyi and Hua, Wenyue and Tang, Ruixiang and Wang, William Yang and Zhang, Yongfeng},
-  booktitle={Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics},
-  year={2025}
+@inproceedings{jin-etal-2025-disentangling-memory,
+    title = "Disentangling Memory and Reasoning Ability in Large Language Models",
+    author = "Jin, Mingyu  and
+      Luo, Weidi  and
+      Cheng, Sitao  and
+      Wang, Xinyi  and
+      Hua, Wenyue  and
+      Tang, Ruixiang  and
+      Wang, William Yang  and
+      Zhang, Yongfeng",
+    booktitle = "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2025",
+    address = "Vienna, Austria",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.acl-long.84/",
+    pages = "1681--1701"
 }
 ```
