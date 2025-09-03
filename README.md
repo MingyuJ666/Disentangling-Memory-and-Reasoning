@@ -27,7 +27,11 @@ You can check the readme.md in load_data file
 
 ## Training
 
-The `train.sh` script can be used for (parameter efficient) fine-tuning a pre-trained language model with CoT data. The accuracy evaluation has been built in the training loop. If performing parameter efficient fine-tuning, only the adapters and the newly added token embeddings will be saved in the checkpoint in `./checkpoints`.
+### Llama is better trained in the reasoning and memory setting. There are some bugs with Qwen. The Llama's Training can show our core idea representatively.
+
+
+
+The `train.sh` script can be used for (parameter-efficient) fine-tuning a pre-trained language model with CoT data. The accuracy evaluation has been built in the training loop. If performing parameter-efficient fine-tuning, only the adapters and the newly added token embeddings will be saved in the checkpoint in `./checkpoints`.
 
 Key arguments:
 
