@@ -140,11 +140,12 @@ CUDA_VISIBLE_DEVICES=2 python train.py \
     --lora_module mlp \
     --int8_training True \
 ```
+### For the LoRA and planning token baseline, we use normal data from the original dataset with a simple reasoning step (by self-distillation or GPT4-O-Mini). To demonstrate the effectiveness of our result, we should see the ablation study in our paper.
 ## Evaluation
 
 In the paper, we report the epoch producing the highest eval accuracy. The accuracy evaluation has been built in the training loop, and can be checked in the `trainer_state.json` file saved in the checkpoints as `eval_acc`.
 
-To do evaluation sparately and save the generation results, use the script `eval.sh`. Need to make sure all the corresponding arguments are the same as the the training arguments in `train.sh`. The model generation results will be saved in the same directory as the loaded checkpoint. The saving format would be question - empty line - generated solution - empty line - ground truth solution.
+To do evaluation separately and save the generation results, use the script `eval.sh`. Need to make sure all the corresponding arguments are the same as the the training arguments in `train.sh`. The model generation results will be saved in the same directory as the loaded checkpoint. The saving format would be question - empty line - generated solution - empty line - ground truth solution.
 
 Key arguments:
 
