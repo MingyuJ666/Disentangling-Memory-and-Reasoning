@@ -23,7 +23,7 @@ cd load_data/
 
 python data_agent.py 
 ```
-You can check the readme.md in load_data file
+You can check the readme.md in the load_data file
 
 ## Training
 
@@ -55,7 +55,7 @@ Key arguments:
 
 * `--num_test`: The maximum number of testing examples to be evaluated at the end of each epoch. We set this to 1000.
 
-* `--int8_training`: Turn on this flag to save more GPU memories. Might impact the model performance.
+* `--int8_training`: Turn on this flag to save more GPU memory. Might impact the model performance.
 
 ### For Train LLAMA2-7B in the StrategyQA dataset: you can follow this setting to get the reported score:
 ```
@@ -140,7 +140,7 @@ CUDA_VISIBLE_DEVICES=2 python train.py \
     --lora_module mlp \
     --int8_training True \
 ```
-### For the LoRA and planning token baseline, we use normal data from the original dataset with a simple reasoning step (by self-distillation or GPT4-O-Mini). To demonstrate the effectiveness of our result, we should see the ablation study in our paper.
+### For the LoRA and planning token baseline, we use normal data from the original dataset with a simple reasoning step (by self-distillation or GPT4-o-Mini). To demonstrate the effectiveness of our result, we should see the ablation study in our paper.
 ## Evaluation
 
 In the paper, we report the epoch producing the highest eval accuracy. The accuracy evaluation has been built in the training loop, and can be checked in the `trainer_state.json` file saved in the checkpoints as `eval_acc`.
