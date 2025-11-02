@@ -5,11 +5,11 @@
 
 If you want to generate the memory step and the reason step naturally without order:
 ```
-python data_agent.py --mode "train" --dataset "StrategyQA"
+python data_agent_modify_version.py --mode "train" --dataset "StrategyQA"
 ```
 If you want first to generate the memory step and then generate the reason step:
 ```
-python data_agent_order.py --mode "train" --dataset "StrategyQA"
+python data_agent_order_modify_version.py --mode "train" --dataset "StrategyQA"
 ```
 2️⃣ However, I have uploaded all the datasets we ran in the dataset_folder, which you should take and use.
 
