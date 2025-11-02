@@ -3,7 +3,7 @@
 ### Preprocess the dataset into reason and Memory pattern
 1️⃣ First: Replace the GPT4's API key in data_agent.py and data_agent_order.py.
 
-If you want to generate the memory step and the reason step naturally without order:
+If you want to generate the memory step and the reason step naturally without order， we suggest running modify_version to ensure the quality of the generated data:
 ```
 python data_agent_modify_version.py --mode "train" --dataset "StrategyQA"
 ```
